@@ -1,0 +1,28 @@
+
+.add-place {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  align-items: center;
+  height: 100%;
+  align-content: center;
+
+  .img-container {
+    img {
+      width: 100%;
+    }
+  }
+
+  .description-container {
+  }
+
+  .go-container {
+    text-align: center;
+    button {
+      padding-left: 30px;
+      padding-right: 30px;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "randomtravel",
+  "app_id": "4f20d2bd",
+  "documentRoot": "dev",
+  "createDocumentRoot": "dev",
+  "watchPatterns": [
+      "dev/**/*",
+      "!dev/lib/**/*"
+    ],
+  "gulpStartupTasks": ["watch"]
+}

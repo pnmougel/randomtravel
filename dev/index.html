@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!-- ionic/angularjs js -->
+    <!--<script src="lib/ionic/js/ionic.bundle.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- style:css -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- endinject -->
+
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+    <!-- vendor:js -->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/ionic/js/ionic.js"></script>
+    <script src="lib/ionic/js/ionic-angular.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/angular-swipe/dist/angular-swipe.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
+    <script src="lib/angular-touch/angular-touch.js"></script>
+    <!-- endinject -->
+
+    <!-- app:js -->
+    <script src="app/app.js"></script>
+    <script src="app/resources.js"></script>
+    <script src="app/controllers/add.js"></script>
+    <script src="app/controllers/main.js"></script>
+    <script src="app/controllers/map.js"></script>
+    <script src="app/controllers/place.js"></script>
+    <!-- endinject -->
+
+    <!-- config:js -->
+    <script src="app/config/config-dev.js"></script>
+    <script src="app/config/config-release.js"></script>
+    <script src="app/config/routes.js"></script>
+    <!-- endinject -->
+</head>
+<body ng-app="random-travel">
+    <ion-nav-view></ion-nav-view>
+</body>
+</html>
