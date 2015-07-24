@@ -1,0 +1,15 @@
+hooks
+node_modules
+platforms
+plugins
+resources
+server/node_modules
+build
+build/*
+gulp_tasks/deploy.js
+dev/lib
+dev/ressources
+dev/css
+www/*
+!www/.gitkeep
+backend/dev/lib

@@ -1,19 +1,35 @@
-<ion-view hide-nav-bar="true">
+<ion-view hide-nav-bar="true" style="background-color: #18A2B7; color: #fff;">
     <ion-content overflow-scroll="true" has-header="false" >
-        <div class="add-place" style="padding: 20px;">
+        <div ng-show="thanks" style="position: absolute; width: 100%; top: 50%; color: #fff; font-size: 30px; text-align: center; transform:translateY(-50%);">
+            <span ng-hide="thanksError">Thank you :-)</span>
+            
+            <div style="margin-top: 60px;">
+                <ion-spinner ng-show="thanksLoad" class="spinner-light" icon="spiral"></ion-spinner>
+                <div ng-show="thanksError" style="font-size: 20px; margin-bottom: 30px;">
+                    <div style="font-size: 30px; margin-bottom: 30px;">Ouch</div>
+                    <div>There was an error.</div><div>Please, try again later.</div>
+                </div>
+                <button ng-hide="thanksLoad" class="button button-positive" ui-sref="main" style="padding-left: 20px; padding-right: 20px; border-color: #fff">
+                    Go back
+                </button>
+
+            </div>
+        </div>
+
+        <div ng-hide="thanks" class="add-place" style="padding: 20px;">
             <div class="img-container" ng-click="takePicture()">
-                <img id="image" style="width: 100%;" ng-src="{{imageSrc}}">
+                <img id="image" style="width: 100%; border: 1px solid #fff;" ng-src="{{imageSrc}}">
             </div>
 
             <div class="description-container" style="width: 100%; margin-top: 15px;">
                 <!--<span style="color: #888;">Say something about this place</span>-->
                 <textarea ng-model="place.description" placeholder="Tell us why people should come here..."
-                          style="width: 100%; padding: 5px; border: 1px solid #ddd;" rows="5">
+                          style="width: 100%; padding: 5px;" rows="5">
                 </textarea>
             </div>
 
             <div class="go-container" style="text-align: center; margin-top: 23px;">
-                <button class="button button-positive" ng-click="save()" style="padding-left: 40px; padding-right: 40px;">
+                <button class="button button-positive" ng-click="save()" style="padding-left: 20px; padding-right: 20px; border-color: #fff">
                     Share this place
                 </button>
             </div>

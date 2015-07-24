@@ -1,13 +1,13 @@
 'use strict';
 
 App.controller('MainCtrl', function ($scope, $ionicPlatform, $cordovaGeolocation, $state, $cordovaCamera, $rootScope) {
-    navigator.geolocation.getCurrentPosition(function (pos) {
-        $rootScope.pos = pos;
-    }, function (error) {}, {
-        enableHighAccuracy: false,
-        timeout: 10000,
-        maximumAge: 60000
-    });
+    //navigator.geolocation.getCurrentPosition(function (pos) {
+    //    $rootScope.pos = pos;
+    //}, function (error) {}, {
+    //    enableHighAccuracy: false,
+    //    timeout: 10000,
+    //    maximumAge: 60000
+    //});
 
     $scope.add = function () {
         $ionicPlatform.ready(function() {

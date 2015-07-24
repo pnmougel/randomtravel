@@ -3,5 +3,10 @@ Application to make random short trip
 
 # Install guide
 
-npm install
-bower install
+```git clone https://github.com/pnmougel/randomtravel.git```
+
+```cd randomtravel```
+
+```npm install```
+
+```bower install```

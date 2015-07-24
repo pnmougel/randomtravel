@@ -5,6 +5,9 @@ App.controller('AddPlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeoloca
     $scope.place = {
         description: ''
     };
+    $scope.thanks = false;
+    $scope.thanksLoad = true;
+    $scope.thanksError = false;
     if('image' in $stateParams) {
         $scope.imageData = $stateParams.image;
         $scope.imageSrc = "data:image/jpeg;base64," + $stateParams.image;
@@ -32,6 +35,7 @@ App.controller('AddPlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeoloca
     };
     
     $scope.save = function () {
+        $scope.thanks = true;
         navigator.geolocation.getCurrentPosition(function(pos) {
             Place.add({
                 image: $scope.imageData,
@@ -39,14 +43,12 @@ App.controller('AddPlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeoloca
                 lng: pos.coords.longitude,
                 description: $scope.place.description
             }).$promise.then(function (data) {
-                $state.go('main');
+                $scope.thanksLoad = false;
             }, function (err) {
-                console.log(JSON.stringify(err));
-                console.log(err);
+                $scope.thanksError = true;
             })
         }, function(error) {
-            console.log('Got error!');
-            console.log(error);
+            $scope.thanksError = true;
         });
     }
 });

@@ -7,10 +7,6 @@ App.controller('PlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeolocatio
     $scope.maxDistance = $stateParams.maxDistance || 3;
     $scope.minDistance = $stateParams.minDistance || 0;
 
-    //var toRadians = function (degrees) {
-    //    return degrees * Math.PI / 180;
-    //};
-
     $scope.add = function () {
         $ionicPlatform.ready(function() {
             $cordovaCamera.getPicture({
@@ -31,11 +27,6 @@ App.controller('PlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeolocatio
         });
     };
 
-    var shuffle = function (o){
-        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-        return o;
-    };
-
     $scope.getPlaces = function () {
         Place.get({
             minDistance: $scope.minDistance,
@@ -45,8 +36,7 @@ App.controller('PlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeolocatio
             limit: 100
         }).$promise
             .then(function (places) {
-                places = shuffle(places);
-
+                places.shuffle();
                 places.forEach(function (place) {
                     place.imageUrl = "data:image/jpeg;base64," + place.image;
                     if(place.distance < 1) {
@@ -64,6 +54,7 @@ App.controller('PlaceCtrl', function ($scope, $ionicPlatform, $cordovaGeolocatio
                 }
                 $ionicSlideBoxDelegate.update();
             }, function (err) {
+                $scope.isLoading = false;
                 $scope.noResults = true;
             })
     };

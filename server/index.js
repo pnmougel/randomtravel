@@ -21,8 +21,8 @@ mongoose.connect('mongodb://localhost/randomTravel', function(err) {
 
 app.use(express.static('apks'));
 
-
-
+// Serve the backend
+app.use('/backend', express.static('backend/dev'));
 
 app.get('/place', function(req, res) {
     if('lat' in req.query && 'lng' in req.query && 'maxDistance' in req.query) {
@@ -60,8 +60,56 @@ app.get('/place', function(req, res) {
     }
 });
 
+app.get('/all', function(req, res) {
+    // Retrieve all locations
+    Location.find({}).exec(function(err, locations) {
+        if (err) {
+            return res.status(500).json(err);
+        }
+        res.json(locations);
+    });
+});
+
+app.delete('/place/:id', function(req, res) {
+    if('id' in req.params) {
+        Location.remove({_id: req.params.id},
+            function (err) {
+                if(err) {
+                    return res.status(500).json({
+                        error: 'Unable to perform the query'
+                    });
+                }
+                return res.json({
+                    ok: 'query performed succesfully'
+                });
+            }
+        )
+    } else {
+        return res.status(500).json({
+            error: 'Missing id parameter'
+        });
+    }
+});
+
+app.put('/place', function(req, res) {
+    if('id' in req.body) {
+        var id = req.body.id;
+        var update = {};
+        if('description' in req.body) { update.description = req.body.description; }
+        if('image' in req.body) { update.image = req.body.image; }
+        if('lat' in req.body && 'lng' in req.body) { update.loc = [req.body.lng, req.body.lat]; }
+        Location.update(
+            {_id: req.body.id}, update,
+            { multi: false },
+            function (err) {
+                if(err) { return res.status(500).json({ error: 'Unable to perform the query' }); }
+                return res.json({ ok: 'query performed succesfully' });
+            }
+        )
+    } else { return res.status(500).json({ error: 'Missing id parameter' }); }
+});
+
 app.post('/place', function(req, res) {
-    console.log('Received request');
     var place = new Location({
         description: req.body.description,
         flagged: 0,
@@ -70,6 +118,31 @@ app.post('/place', function(req, res) {
     });
     place.save();
     res.json({ result: 'ok' });
+});
+
+app.post('/flagged', function(req, res) {
+    if('id' in req.body) {
+        var id = req.body.id;
+        Location.update(
+            {_id: req.body.id},
+            { $inc: { flagged: 1 }},
+            { multi: false },
+            function (err, numChanged) {
+                if(err) {
+                    return res.status(500).json({
+                        error: 'Unable to perform the query'
+                    });
+                }
+                return res.json({
+                    ok: 'query performed succesfully'
+                });
+            }
+        )
+    } else {
+        return res.status(500).json({
+            error: 'Missing id parameter'
+        });
+    }
 });
 
 var server = app.listen(3000,function(){
